@@ -2,7 +2,9 @@
 
 Neste desafio, busca-se atender a necessidade de um gestor de uma grande cadeia de Cafés de extrair percepções sobre experiências de usuários baseando-se em avaliações de clientes. A obtenção de conhecimento ao utilizar-se de serviços inteligentes de aprendizagem a partir de um grande volume de dados, também chamada de *knowledge mining* ou mineração de conhecimento, é um ramo em pleno crescimento na inteligência artificial.
 
-Para o objetivo definido, serão utilizados os recursos ***Azure AI Search*** (que conduzirá a indexação e pesquisa), ***Azure AI services*** (cujos serviços para o enriquecimento de dados através de inteligência artificial serão aproveitados nesta solução) e ***Storage account*** (para o armazenamento de documentos em sua forma crua).
+Para o objetivo definido, serão utilizados os recursos ***Azure AI Search*** (que conduzirá a indexação e pesquisa), ***Azure AI services*** (cujos serviços para o enriquecimento de dados através de inteligência artificial serão aproveitados nesta solução) e ***Storage account*** (para o armazenamento de documentos em sua forma bruta).
+
+Os passos aqui adaptados são abordados neste [laboratório](https://microsoftlearning.github.io/mslearn-ai-fundamentals/Instructions/Labs/11-ai-search.html), proposto pela Microsoft.
 
 ## Passo-a-Passo
 
@@ -80,4 +82,26 @@ Para o objetivo definido, serão utilizados os recursos ***Azure AI Search*** (q
 
 ### Carregamento dos documentos no *Azure Storage*
 
+1. Na página do recurso de ***Storage account*** criado, selecionar ***Containers*** sob a seção ***Data Storage*** do menu à esquerda e, então, ***+ Container*** para adicionar um novo contêiner. No painel ***New container*** aberto, escolher as configurações conforme sugerido e finalizar a criação do contêiner selecionando ***Create***.
 
+- ***Name***: coffee-reviews;
+- ***Public access level***: Escolher *Container (anonymous read access for containers and blobs)*. Esta opção só estará disponível caso o acesso anônimo tenha sido habilitado no passo 3 do tópico ***Criação da Storage account***;
+- ***Advanced***: Não modificar as configurações;
+
+![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/c1b6e8d2-ba9f-429e-a3da-ea679000274c)
+
+2. Efetuar o download dos documentos contendo as avaliações dos consumidores. Estes documentos brutos de exemplo foram disponibilizados pela Microsoft através deste [link](https://aka.ms/mslearn-coffee-reviews), de forma compactada. Os mesmos arquivos podem ser encontrados no diretório [documents](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/tree/main/documents), já descompactados e prontos para serem carregados no contêiner ***coffee-reviews***.
+
+3. Ao retornar para a página ***Containers***, selecionar o contêiner ***coffee-reviews***, recém-criado. Na página do contêiner, selecionar ***Overview*** e, em seguida, ***Upload***. No painel ***Upload blob*** aberto, selecionar o link ***Browse for files***, e procurar pelos documentos baixados anteriormente nos arquivos locais do dispositivo. Escolhidos os arquivos, selecionar ***Upload***, para que estes sejam carregados no contêiner de armazenamento.
+
+Obs: É importante que os arquivos estejam descompactados, de modo a permitir que sejam carregados de forma separada.
+
+![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/fc6de00e-7944-4403-b345-5800471c9f19)
+
+![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/1bad1821-0a9c-465e-8e11-17e47b8aaba6)
+
+![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/d93db583-e48b-4ed1-ac73-77faa47dd3aa)
+
+### Indexação dos documentos
+
+1. 
