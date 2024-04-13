@@ -104,4 +104,34 @@ Obs: É importante que os arquivos estejam descompactados, de modo a permitir qu
 
 ### Indexação dos documentos
 
-1. 
+Inicia-se nesta etapa o processo de extração de informações dos documentos carregados anteriormente no contêiner de armazenamento. O *Import data wizard*, disponibilizado no portal do Azure, possibilita criar um índice, indexador e importar tais documentos de pesquisa para o índice do *Azure AI Search*.
+
+1. No [Azure portal](https://portal.azure.com/), prosseguir até o recurso ***Azure AI Search*** criado. 
+
+![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/915036a2-98f1-4e12-98fb-9afbce7ea3d8)
+
+2. Na página do recurso, selecionar ***Overview*** no menu à esquerda e, em seguida, ***Import data***.
+
+![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/053f4e11-2889-4f3f-932e-1f3dbc693abd)
+
+3. Na aba ***Connect to your data*** da página ***Import data***, especificar que a fonte dos dados (***Data Source***) será o ***Azure Blob Storage***, escolher as seguintes configurações sugeridas e, ao final, selecionar ***Next: Add cognitive skills (Optional)***.
+
+- ***Data Source***: Fonte de dados a serem importados. Escolher *Azure Blob Storage*;
+- ***Data source name***: coffee-customer-data;
+- ***Data to extract***: *Content and metadata*;
+- ***Parsing mode***: Modo de análise sintática. Escolher *Default*;
+- ***Connection String***: Selecionar o link ***Choose an existing connection***. Na página ***Storage accounts*** aberta, selecionar a *storage account* criada anteriormente e, em seguida, na página ***Containers***, selecionar o contêiner ***coffee-reviews*** e o botão ***Select***, retornando às configurações de importação;
+- ***Managed identity authentication***: None;
+- ***Container name***: Após a escolha da conexão existente, este campo é preenchido automaticamente;
+- ***Blob folder***: Não alterar (deixar em branco);
+- ***Description***: *Reviews for Fourth Coffee shops*.
+
+![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/271014bc-517a-488e-838d-0d3eb0ca236b)
+
+![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/5b491ada-a3f3-46e1-8006-ba6514917241)
+
+![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/b9093900-547f-4d0a-9528-3729a444f2a6)
+
+![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/b7b86983-7bc3-47e0-bcaa-11a3aba94029)
+
+4. 
