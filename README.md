@@ -134,4 +134,90 @@ Inicia-se nesta etapa o processo de extração de informações dos documentos c
 
 ![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/b7b86983-7bc3-47e0-bcaa-11a3aba94029)
 
-4. 
+4. Na seção ***Attach Al Services***, selecionar o recurso ***Azure AI services*** criado anteriormente.
+
+![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/f24cfed2-8367-42d8-94d8-bc1fc5a5c006)
+
+5. Prosseguindo para a seção ***Add enrichments***, configurar confome sugerido.
+
+- ***Skillset name***: modificar o nome para *coffee-skillset*;
+- ***Enable OCR and merge all text into merged content field***: Habilitar. Após habilitado, será possível verificar todas as demais opções de enriquecimento;
+- ***Source data field***: Escolher *merged_content*;
+- ***Enrichment granularity level***: Modificar para *Pages (5000 character chunks)*;
+- ***Enable incremental enrichment***: Não habilitar;
+- Selecionar os seguintes campos para ***Text Cognitive Skills***:
+  - Extract location names (locations);
+  - Extract key phrases (keyphrases);
+  - Detect sentiment (sentiment);
+- Selecionar os seguintes campos para ***Image Cognitive Skills:
+  - Generate tags from images (imageTags);
+  - Generate captions from images (imageCaption);
+ 
+![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/2e8939d6-dce9-4d82-95e7-e9859be7cce6)
+
+6. Prosseguir para a seção ***Save enrichments to a knowledge store***. Abaixo de um aviso pedindo o preenchimento de uma *Storage Account Connection String*, selecionar o link ***Choose an existing connection***. Na tela ***Storage accounts***, selecionar a conta criada anteriormente. Na tela **Containers***, selecionar ***+ Container*** e, no painel aberto, criar um novo container chamado *knowledge-store*, com o nível de privacidade configurado para *Private*. Selecionar ***Create***, no fim do processo e, ao retornar para a página ***Containers***, selecionar o container recém criado e, então, ***Select***.
+
+- ***Name***: knowledge-store;
+- ***Anonymous access level***: Private (no anonymous access);
+
+![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/5fa45322-93f7-4aa8-b7da-bbfd97ec23bf)
+
+![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/de99fe69-42b8-43e2-9add-cbf019a33e4b)
+
+![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/50cbdc86-0326-4ec9-aa50-3932a4c4f7f2)
+
+![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/5f6cc542-bc04-4d13-8232-8f7e468d29f0)
+
+7. Ao retornar para a seção ***Save enrichments to a knowledge store***, selecionar *None* em ***Managed identity authentication*** e os itens abaixo relacionados. Selecionando *Document* em *Azure blob projections*, o campo ***Container name*** será mostrado, o contêiner *knowledge-store* já preenchido, não deverá ser modificado. Finalizadas as configurações, selecionar ***Next: Customize target index***.
+
+- Image projections
+- Documents
+- Pages
+- Key phrases
+- Entities
+- Image details
+- Image references
+- Document
+- ***Container name***: knowledge-store
+
+![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/15f5f2b0-8581-4311-97e3-fb1dc1bc4843)
+
+8. Na aba ***Customize target index***, realizar configurações, conforme surgerido.
+
+- ***Index name***: coffee-index;
+- ***Key***: metadata_storage_path;
+- ***Suggester name***: Manter em branco;
+- ***Search mode***: manter o valor preenchido automaticamente;
+
+![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/9b77d4fd-47ee-488d-8cbd-756176f30454)
+
+9. Ainda na aba ***Customize target index***, revisar os campos selecionados por padrão e, para cada um deles, selecionar ***filterable***. Realizadas as configurações, selecionar ***Next: Create an indexer***.
+
+![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/559a1898-6600-40f6-8060-9defd0d4e10d)
+
+10. Na aba ***Create an indexer***, realizar as configurações sugeridas e selecionar ***Submit*** para criação da fonte de dados, skillset, índice e indexador. O indexador é executado automaticamente e executa o pipeline de indexação, o qual: extrai os campos de metadados dos documentos e o conteúdo da fonte de dados, executa o _skillset_ de habilidades cognitivas para gerar campos mais enriquecidos e mapeia os campos extraídos para o índice.
+
+- ***Indexer name***: coffee-indexer;
+- ***Schedule***: Once (a ser executado uma única vez);
+- ***Advanced options***:
+  - ***Base-64 Encode Keys***: Selecionar, para que as chaves de codificação possam deixar o índice mais eficiente;
+ 
+![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/f35b60fe-4ceb-41bd-a209-a0b9c694f177)
+
+11. Retornar à pagina do recurso *Azure AI Search* criado e, no menu à esquerda, na seção ***Search Management***, selecionar ***Indexers*** e o novo ***coffee-indexer***. Se necessário, é possível atualizar a página selecionando ***Refresh***, até que o ***Status*** indique sucesso.
+
+![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/d645fbeb-ddff-4ea6-8a2f-98401df15873)
+
+![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/bb53829f-c584-455b-a78b-37577fafc610)
+
+![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/82901a02-0021-4b89-a550-898db58a1cf8)
+
+### Pesquisa pelo índice
+
+Será utilizado o *Search explorer* para escrever e testar as *queries*. Esta é uma ferramenta que provê uma forma fácil de validar a qualidade do índice de pesquisa. As *queries* são escritas e retornam resultados no formato JSON.
+
+1. Na página principal do recurso *Azure AI search* criado, selecionar ***Overview*** no menu à esquerda e, em seguida, ***Search explorer***.
+
+![image](https://github.com/danielfscosta/dio-aifundamentals-projeto4-azas/assets/69484807/92f26e47-9ab6-495f-a5c4-24345063f180)
+
+2. Na página do ferramenta ***Search explorer***, verificar que o índice selecionado é o *coffee-index* criado anteriormente. Selecionar ***View*** e ***JSON view***, para alterar a visão. No campo ***JSON query editor***, 
